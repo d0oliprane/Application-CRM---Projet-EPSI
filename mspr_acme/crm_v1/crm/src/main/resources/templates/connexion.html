@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link  rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+        <title>Connexion</title>
+    </head>
+    <body class="bg-fixed bg-auto bg-center bg-no-repeat" style="background-image: url('/images/nouveau.jpg');">
+        <div class="fixed z-50 top-0 w-full bg-white">
+            <div class="flex items-center justify-center mt-2 mb-4">
+                <img th:src="@{/images/Ecritures/titres/84f1983bab734f900b78c0f7d8d6c136.png}" height="200" width="220" alt="">
+                <img th:src="@{/images/Ecritures/titres/93bd6a8d84735fb8542e5e2ba6097242.png}" height="350" width="400" alt="">
+            </div>
+            <div class="flex items-center justify-center mb-2">
+                <img th:src="@{/images/Ecritures/titres/458227e3219d4d73753c52990003ebca.png}" height="300" width="400" alt="">
+            </div>
+        </div>
+        <div>
+            <div class="uppercase flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                <div class="w-full rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+                    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                        <h1 class="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl uppercase">
+                            Connexion
+                        </h1>
+                        <form class="space-y-4 md:space-y-6" th:action="@{/login}" method="post">
+                            <div>
+                                <label for="username" class="block mb-2 text-sm font-medium text-white">Identifiant</label>
+                                <input type="text" name="username" id="username" class="bg-gray-50 border-2 border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required="">
+
+                            </div>
+                            <div>
+                                <label for="password" class="block mb-2 text-sm font-medium text-white">Mot de passe</label>
+                                <input type="password" name="password" id="password" class="bg-gray-50 border-2 border-orange-500 text-gray-900 sm:text-sm rounded-lg focus:ring-orange-600 focus:border-orange-800 block w-full p-2.5" required="">
+                            </div>
+
+                            <button type="submit" class="uppercase w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Connexion</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

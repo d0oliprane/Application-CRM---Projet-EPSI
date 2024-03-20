@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation de suppression</title>
+</head>
+<body>
+<div class="container mx-auto">
+    <h2 class="text-2xl font-bold mb-4">Confirmation de suppression</h2>
+
+    <div class="confirmation-modal">
+        <div class="confirmation-modal-content p-4 bg-white rounded shadow">
+            <span class="close text-3xl cursor-pointer">&times;</span>
+            <p class="mb-4">Êtes-vous sûr de vouloir supprimer cet élément ?</p>
+            <form th:action="@{'/supprimer-produit/' + ${produit.idProduit}}" method="post" class="space-y-2">
+                <input type="hidden" name="id" th:value="${produit.idProduit}">
+                <div class="flex items-center">
+                    <input type="radio" id="confirmationOui" name="confirmation" value="oui" class="mr-2">
+                    <label for="confirmationOui">Oui</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="radio" id="confirmationNon" name="confirmation" value="non" class="mr-2">
+                    <label for="confirmationNon">Non</label>
+                </div>
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Confirmer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

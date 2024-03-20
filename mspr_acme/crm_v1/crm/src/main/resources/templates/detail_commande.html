@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/main.css}"/>
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+        <title>Panier</title>
+    </head>
+    <body class="bg-fixed bg-cover bg-center bg-no-repeat" style="background-image: url('/images/nouveau4.png');">
+        <nav th:replace="~{fragments/sidebar}"></nav>
+        <div class="flex flex-col justify-center items-center mt-52">
+            <div class="bg-gray-100 rounded-lg shadow-lg p-6">
+                <form th:action="@{'/modifier-commande/' + ${idCommande}}" method="post" th:object="${commande}">
+                    <div th:if="${#authorization.expression(('hasRole(''ADMIN'') or hasRole(''RESPONSABLE'')'))}">
+                        <label class="block mb-2 text-sm font-medium text-gray-900" for="statutLivraison">Statut de
+                            livraison :</label>
+                        <div class="flex justify-between">
+                            <select class="uppercase font-semibold bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-fit p-3 hover:text-orange-500"
+                                    name="statutLivraison" id="statutLivraison">
+                                <option  th:text="${commande.statutLivraison}" th:value="${commande.statutLivraison}" selected></option>
+                                <option th:each="statutLivraison : ${statutLivraisons}" th:value="${statutLivraison}"
+                                        th:text="${statutLivraison}"></option>
+                            </select>
+                            <button type="submit"
+                                    class="uppercase inline-flex items-center px-4 py-2 mt-4 sm:mt-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg focus:ring-4 focus:ring-primary-200 ">
+                                Valider
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <h1 class="text-2xl font-bold mb-6">Détail de la commande</h1>
+                <div class="mb-4">
+                    <div class="flex items-center">
+                        <div class="flex justify-between">
+                            <table class="w-full text-sm text-left rtl:text-right font-bold">
+                                <thead class="text-xs uppercase">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">
+                                            Date
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Numéro de commande
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Passée par
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Client
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Prix Total(€)
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="font-semibold">
+                                        <td th:text="${commande.dateCommande}" class="px-6 py-4"></td>
+                                        <td th:text="${commande.numeroCommande}" class="px-6 py-4"></td>
+                                        <td th:text="${employe.matricule}" class="px-6 py-4"></td>
+                                        <td th:text="${commande.client.nom}" class="px-6 py-4"></td>
+                                        <td th:text="${totalCommande}" class="px-6 py-4"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <span class="font-medium"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-400">
+                            <thead class="text-xs uppercase bg-gray-700 text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Nom du produit
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Catégorie
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Quantité
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Prix(€)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="produitCommande : ${produitsCommande}"
+                                    class="produits border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
+                                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
+                                        <a th:href="@{'/produit/' + ${produitCommande.produit.idProduit}}"
+                                           th:text="${produitCommande.produit.nom}"></a>
+                                    </th>
+                                    <td th:text="${produitCommande.produit.categorie}" class="px-6 py-4"></td>
+                                    <td th:text="${produitCommande.quantite}" class="px-6 py-4"></td>
+                                    <td th:text="${produitCommande.produit.prix}" class="px-6 py-4"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

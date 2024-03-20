@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/main.css}"/>
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+        <title>Confirmation d'archivage</title>
+    </head>
+    <body class="bg-fixed bg-auto bg-center bg-no-repeat" style="background-image: url('/images/nouveau1.jpg');">
+        <nav th:replace="~{fragments/sidebar}"></nav>
+        <h1 class="text-2xl font-bold mb-4">Confirmation d'archivage</h1>
+        <div class="flex flex-col items-center mt-52">
+            <div class="bg-gray-100 opacity-90 rounded-lg shadow-lg p-6">
+                <span class="close text-3xl cursor-pointer -right-full">&times;</span>
+                <p class="mb-4">Êtes-vous sûr de vouloir désarchiver cet élément ?</p>
+                <form th:action="@{'/desarchiver-client/' + ${client.idUtilisateur}}" method="post" class="space-y-2">
+                    <div class="flex items-center">
+                        <input type="radio" id="confirmationOui" name="confirmation" value="oui" class="mr-2">
+                        <label for="confirmationOui">Oui</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="confirmationNon" name="confirmation" value="non" class="mr-2">
+                        <label for="confirmationNon">Non</label>
+                    </div>
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        Confirmer
+                    </button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+                <

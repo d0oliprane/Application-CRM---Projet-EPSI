@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/main.css}" />
+        <link rel="stylesheet" th:href="@{/css/search.css}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <title>Liste des produits</title>
+    </head>
+    <body class="bg-fixed bg-cover bg-center bg-no-repeat" style="background-image: url('/images/nouveau4.png');">
+        <nav th:replace="~{fragments/sidebar}"></nav>
+        <div class="container w-11/12 mx-auto sm:rounded-lg pt-32 opacity-95 text-white">
+            <label for="searchbox" class="sr-only">Search</label>
+            <div class="my-3">
+                <input onkeyup="liveSearch()" id="searchbox" type="search" class="block p-2 ps-10 text-sm border rounded-lg w-80 bg-gray-700 border-gray-600 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500" placeholder="Rechercher">
+            </div>
+            <div class="hidden lg:block">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-400">
+                    <thead class="text-xs uppercase bg-gray-700">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Nom du produit
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Description
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Catégorie
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Stock
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Prix(€)
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Modification
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Archivage
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="produit : ${produits}" class="produits border-b bg-gray-800 border-gray-700 hover:bg-gray-600">
+                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
+                                <a th:href="@{'/produit/' + ${produit.idProduit}}" th:text="${produit.nom}"></a>
+                            </th>
+                            <td th:text="${produit.description}" class="px-6 py-4"></td>
+                            <td th:text="${produit.categorie}" class="px-6 py-4"></td>
+                            <td th:text="${produit.stock}" class="px-6 py-4"></td>
+                            <td th:text="${produit.prix}" class="px-6 py-4"></td>
+                            <td class="px-6 py-3">
+                                <form th:action="@{'/modifier-produit/' + ${produit.idProduit}}" method="get">
+                                    <button class="text-white py-2 px-4 rounded font-medium bg-blue-500 hover:bg-blue-600" type="submit">Modifier
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="px-6 py-3">
+                                <form th:action="@{'/confirmation-archivage/' + ${produit.idProduit}}" method="get">
+                                    <button class="text-white py-2 px-4 rounded font-medium bg-orange-500 hover:bg-orange-600" type="submit">Archiver</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="block lg:hidden">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-400 flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+                    <thead class="text-sm uppercase bg-gray-700 text-gray-400">
+                    <tr th:each="produit : ${produits}"  class="flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none sm:mb-0">
+                        <th scope="col" class="p-3 text-left">Nom</th>
+                        <th scope="col" class="p-3 text-left">Description</th>
+                        <th scope="col" class="p-3 text-left">Catégorie</th>
+                        <th scope="col" class="p-3 text-left">Stock</th>
+                        <th scope="col" class="p-3 text-left">Prix(€)</th>
+                        <th scope="col" class="p-3 text-left">Modification</th>
+                        <th scope="col" class="border-b border-gray-800 p-3 text-left">Archivage</th>
+                    </tr>
+                    </thead>
+                    <tbody class="flex-1 sm:flex-none">
+                    <tr th:each="produit : ${produits}"class="produits bg-gray-800 border-b border-gray-500 hover:bg-gray-600 flex flex-col flex-no wrap sm:table-row sm:mb-0">
+                        <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-white">
+                            <a th:href="@{'/produit/' + ${produit.idProduit}}" th:text="${produit.nom}"></a>
+                        </th>
+                        <td th:text="${produit.description}" class="p-3 truncate"></td>
+                        <td th:text="${produit.categorie}" class="p-3 truncate"></td>
+                        <td th:text="${produit.stock}" class="p-3 truncate"></td>
+                        <td th:text="${produit.prix}" class="p-3 truncate"></td>
+                        <td class="p-3 cursor-pointer truncate">
+                            <form th:action="@{'/modifier-produit/' + ${produit.idProduit}}" method="get">
+                                <button class="font-medium text-blue-500 hover:underline" type="submit">Modifier</button>
+                            </form>
+                        </td>
+                        <td class="p-3 cursor-pointer">
+                            <form th:action="@{'/confirmation-archivage/' + ${produit.idProduit}}" method="get">
+                                <button class="font-medium text-orange-500 hover:underline" type="submit">Archiver</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" th:src="@{/js/search.js}"></script>
+        <script type="text/javascript" th:src="@{/js/script_navbar.js}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    </body>
+</html>

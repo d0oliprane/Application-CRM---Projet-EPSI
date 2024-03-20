@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+        <title>Menu</title>
+    </head>
+    <body class="bg-fixed bg-auto bg-center bg-no-repeat" style="background-image: url('/images/nouveau.jpg');">
+        <div class="h-screen" style="margin-left: 13%; margin-right: 13%; margin-top: 2%">
+            <div class="grid h-full sm:grid-cols-8 mx-0">
+                <div class="col-start-1 col-end-3 m-0">
+                    <a th:href="@{/ajouter-produit}"><img th:src="@{/images/Menu/ajouter_produit.png}" alt="+ Produit +"></a></div>
+                <div class="col-start-3 col-end-5 m-0">
+                    <a th:href="@{/produits}"><img th:src="@{/images/Menu/produit.png}" alt="Produits"></a></div>
+                <div class="col-start-5 col-end-7 m-0">
+                    <a th:href="@{/passer-commande}"><img th:src="@{/images/Menu/passer_commande.png}" alt="+ Commande +"></a></div>
+                <div class="col-start-7 col-end-9 m-0">
+                    <a th:href="@{/commandes}"><img th:src="@{/images/Menu/commande.png}" alt="Commandes"></a></div>
+                <div class="col-start-1 col-end-3 m-0">
+                    <a th:href="@{/ajouter-client}"><img th:src="@{/images/Menu/ajouter_client.png}" alt="+ Client +"></a></div>
+                <div class="col-start-3 col-end-5 m-0">
+                    <a th:href="@{/clients}"><img th:src="@{/images/Menu/client.png}" alt="Clients"></a></div>
+                <div class="col-start-5 col-end-7 m-0">
+                    <a th:href="@{/clients-archives}"><img th:src="@{/images/Menu/client_archive.png}" alt="Clients archivés"></a></div>
+                <div class="col-start-7 col-end-9 m-0">
+                    <a th:href="@{/produits-archives}"><img th:src="@{/images/Menu/produit_archive.png}" alt="Produits archivés"></a></div>
+                <div class="col-start-1 col-end-3 m-0" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/ajouter-employe}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><img th:src="@{/images/Menu/ajouter_employe.png}" alt="+ Employé +"></a></div>
+                <div class="col-start-3 col-end-5 m-0" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/employes}" th:if="${#authorization.expression('hasRole(''ADMIN'') or hasRole(''RESPONSABLE'')')}"><img th:src="@{/images/Menu/employe.png}" alt="Employés"></a></div>
+                <div class="col-start-5 col-end-7 m-0" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/statistiques}" th:if="${#authorization.expression('hasRole(''ADMIN'') or hasRole(''RESPONSABLE'')')}"><img th:src="@{/images/Menu/stats.png}" alt="Statistiques"></a></div>
+                <div class="col-start-7 col-end-9 m-0" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/employes-archives}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><img th:src="@{/images/Menu/employe_archive.png}" alt="Employés archivés"></a></div>
+                <div class="col-start-4 col-end-6 m-0">
+                    <a th:href="@{/deconnexion}"><img th:src="@{/images/Menu/deco.png}" alt="Déconnexion"></a></div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link  rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+        <title>Déconnexion</title>
+    </head>
+    <body class="bg-fixed bg-auto bg-center bg-no-repeat" style="background-image: url('/images/nouveau.jpg');">
+        <div class="fixed z-50 top-0 w-full bg-white">
+            <div class="flex items-center justify-center mt-2 mb-4">
+                <img th:src="@{/images/Ecritures/titres/84f1983bab734f900b78c0f7d8d6c136.png}" height="200" width="220" alt="">
+                <img th:src="@{/images/Ecritures/titres/93bd6a8d84735fb8542e5e2ba6097242.png}" height="350" width="400" alt="">
+            </div>
+            <div class="flex items-center justify-center mb-2">
+                <img th:src="@{/images/Ecritures/titres/458227e3219d4d73753c52990003ebca.png}" height="300" width="400" alt="">
+            </div>
+        </div>
+        <div class="text-white uppercase flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <div class="rounded-lg shadow-md p-8 max-w-md">
+                <h2 class="text-2xl font-bold mb-4">Déconnexion</h2>
+                <p class="mb-4 font-medium">Êtes-vous sûr(e) de vouloir vous déconnecter ?</p>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit"
+                            class="mb-4 uppercase w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Déconnexion
+                    </button>
+                </form>
+                <a class="hover:text-blue-200 underline font-medium" th:href="@{/main_menu}">Retour au menu principal</a>
+            </div>
+        </div>
+    </body>
+</html>

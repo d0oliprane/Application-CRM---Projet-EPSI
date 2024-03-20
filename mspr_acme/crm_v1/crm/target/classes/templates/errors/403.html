@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" >
+        <link rel="stylesheet" th:href="@{/css/main.css}"/>
+        <title>Accès refusé</title>
+    </head>
+    <body class="bg-fixed bg-auto bg-center bg-no-repeat" style="background-image: url('/images/erreur1.jpg');">
+        <div class="w-full h-screen flex flex-col items-center justify-center">
+            <div class="flex flex-col items-center justify-center">
+                <p class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-wider text-red-600 mt-8">403</p>
+                <p class="uppercase text-2xl md:text-3xl lg:text-4xl font-bold text-red-600 mt-2">Accès interdit</p>
+                <p class="md:text-lg xl:text-xl text-red-600 mt-4">Whoops, vous n'êtes pas authorisé à être ici malandrin !!!</p>
+            </div>
+            <div class="flex items-center justify-center mt-2 mb-4">
+                <a th:href="@{/main_menu}"><img th:src="@{/images/logo.png}" alt=""></a>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/main.css}" />
+        <link rel="stylesheet" th:href="@{/css/search.css}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <title>Statistique des ventes</title>
+    </head>
+    <body class="bg-fixed bg-cover bg-center bg-no-repeat" style="background-image: url('/images/nouveau4.png');">
+        <nav th:replace="~{fragments/sidebar}"></nav>
+        <div class="mt-48">
+            <div class="mx-auto mt-16 mb-3 rounded-lg" id="chart_chiffreTotal" style="width: 400px; height: 200px;border-radius: 10px; overflow: hidden;"></div>
+            <div class="mt-10">
+                <div class="pl-14">
+                    <select id="selectMonth" class="w-fit appearance-none border border-gray-400 hover:border-gray-500 px-2 py-1 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                        <option selected>Sélectionner un mois</option>
+                        <option value="tous">Tous les mois</option>
+                        <option value="janvier">Janvier</option>
+                        <option value="février">Février</option>
+                        <option value="mars">Mars</option>
+                        <option value="avril">Avril</option>
+                        <option value="mai">Mai</option>
+                        <option value="juin">Juin</option>
+                        <option value="juillet">Juillet</option>
+                        <option value="août">Août</option>
+                        <option value="septembre">Septembre</option>
+                        <option value="octobre">Octobre</option>
+                        <option value="novembre">Novembre</option>
+                        <option value="décembre">Décembre</option>
+                    </select>
+                </div>
+                <div class="mx-auto w-11/12 mt-5 mb-3" id="chart_div" style="border-radius: 10px; overflow: hidden;"></div>
+            </div>
+            <div class="mt-10 pl-14 flex">
+                <div>
+                    <select id="selectMonthE" class="w-fit appearance-none border border-gray-400 hover:border-gray-500 px-2 py-1 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                        <option selected>Sélectionner un mois</option>
+                        <option value="tous">Tous les mois</option>
+                        <option value="janvier">Janvier</option>
+                        <option value="février">Février</option>
+                        <option value="mars">Mars</option>
+                        <option value="avril">Avril</option>
+                        <option value="mai">Mai</option>
+                        <option value="juin">Juin</option>
+                        <option value="juillet">Juillet</option>
+                        <option value="août">Août</option>
+                        <option value="septembre">Septembre</option>
+                        <option value="octobre">Octobre</option>
+                        <option value="novembre">Novembre</option>
+                        <option value="décembre">Décembre</option>
+                    </select>
+                </div>
+                <div class="pl-3">
+                    <select id="selectEmploye" class="w-fit appearance-none border border-gray-400 hover:border-gray-500 px-2 py-1 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                        <option selected>Sélectionner un employé</option>
+                        <th:block th:each="employeName : ${employeNames}">
+                            <option th:text="${employeName}"></option>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+            <div class="mx-auto w-11/12 mt-5 mb-3" id="chart_emp" style="border-radius: 10px; overflow: hidden;"></div>
+            <div class="mx-auto w-11/12 mt-10 mb-3" id="chart_client" style="border-radius: 10px; overflow: hidden;"></div>
+            <div class="mx-auto w-11/12 mt-10 mb-3" id="chart_produitPlus" style="border-radius: 10px; overflow: hidden;"></div>
+            <div class="mx-auto w-11/12 mt-10 mb-3" id="chart_produitMoins" style="border-radius: 10px; overflow: hidden;"></div>
+            <div class="mx-auto w-11/12 mt-10 mb-3" id="chart_chiffreMoisAnnee" style="border-radius: 10px; overflow: hidden;"></div>
+        </div>
+        <script th:inline="javascript">
+            window.graphDataPreparation = /*[[${graphDataPreparation}]]*/ {};
+            window.graphDataAcheminement = /*[[${graphDataAcheminement}]]*/ {};
+            window.graphDataTerminees = /*[[${graphDataTerminees}]]*/ {};
+            window.chiffresAffairesParClient = /*[[${chiffresAffairesParClient}]]*/ {};
+            window.top5ProduitsPlusVendus = /*[[${top5ProduitsPlusVendus}]]*/ {};
+            window.top5ProduitsMoinsVendus = /*[[${top5ProduitsMoinsVendus}]]*/ {};
+            window.chiffreAffairesParMoisEtAnnee = /*[[${chiffreAffairesParMoisEtAnnee}]]*/ {};
+            window.chiffreAffairesTotal = /*[[${chiffreAffairesTotal}]]*/ {};
+            window.graphDataPreparationE = /*[[${graphDataPreparationE}]]*/ {};
+            window.graphDataAcheminementE = /*[[${graphDataAcheminementE}]]*/ {};
+            window.graphDataTermineesE = /*[[${graphDataTermineesE}]]*/ {};
+        </script>
+        <script th:src="@{/js/script_navbar.js}"></script>
+        <script th:src="@{/js/stats.js}"></script>
+    </body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/main.css}"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <title>Ajouter un Employé</title>
+    </head>
+    <body class="bg-fixed bg-auto bg-center bg-no-repeat" style="background-image: url('/images/nouveau.jpg');">
+        <nav th:replace="~{fragments/sidebar}"></nav>
+        <div class="mt-32 py-8 px-4 mx-auto max-w-screen-sm lg:py-16 text-white">
+            <h1 class="uppercase mb-4 text-2xl font-bold">Ajouter un employé</h1>
+            <form th:action="@{/ajouter-employe}" method="post" th:object="${employe}">
+                <div class="grid gap-3 grid-cols-1 md:grid-cols-3 md:gap-3 sm:grid-cols-2 sm:gap-3">
+                    <div class="w-full">
+                        <label for="prenom" class="block mb-2 text-sm font-medium">Prénom</label>
+                        <input th:field="*{prenom}" type="text" name="prenom" id="prenom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="" required>
+                    </div>
+                    <div class="w-full">
+                        <label for="nom" class="block mb-2 text-sm font-medium">Nom</label>
+                        <input th:field="*{nom}" type="text" name="nom" id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="w-full">
+                        <label for="numRue" class="block mb-2 text-sm font-medium">N° rue</label>
+                        <input th:field="*{numeroRue}" type="text" name="numRue" id="numRue" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="sm:col-span-1 md:col-span-2">
+                        <label for="libelle" class="block mb-2 text-sm font-medium">Adresse</label>
+                        <input th:field="*{libelleRue}" type="text" name="libelle" id="libelle"  required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="w-full">
+                        <label for="codePostal" class="block mb-2 text-sm font-medium">Code postal</label>
+                        <input th:field="*{codePostal}" type="text" name="codePostal" id="codePostal" required  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="w-full">
+                        <label for="ville" class="block mb-2 text-sm font-medium">Ville</label>
+                        <input th:field="*{ville}" type="text" name="ville" id="ville"  required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="w-full">
+                        <label for="email" class="block mb-2 text-sm font-medium">E-mail</label>
+                        <input th:field="*{email}" type="email" name="email" id="email" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="w-full">
+                        <label for="telephone" class="block mb-2 text-sm font-medium">Téléphone</label>
+                        <input th:value="${employe.telephone}" type="tel" name="telephone" id="telephone" required minlength="10" maxlength="10" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="w-full">
+                        <label class="block mb-2 text-sm font-medium" for="roles">Role :</label>
+                        <select class="uppercase font-semibold bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-600 focus:border-orange-600 block w-full p-3 hover:text-orange-500" name="roles" id="roles">
+                            <option th:each="role : ${roles}" th:value="${role}" th:text="${role}" selected></option>
+                        </select>
+                    </div>
+                    <div class="w-full">
+                        <label for="mdp" class="block mb-2 text-sm font-medium">Mot de Passe</label>
+                        <input th:field="*{motDePasse}" type="password" name="mdp" id="mdp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="" required>
+                    </div>
+                    <div class="w-full">
+                        <label for="ConfirmMdp" class="block mb-2 text-sm font-medium">Confirmation mot de Passe</label>
+                        <input type="password" name="ConfirmMdp" id="ConfirmMdp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="" required>
+                        <span id="mdpError" class="text-red-600 hidden">Les mots de passe ne correspondent pas.</span>
+                        <span th:if="${errorMdp}" class="text-red-600 text-sm mt-1">Les mots de passe ne correspondent pas</span>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="matricule" class="block mb-2 text-sm font-medium">Matricule</label>
+                            <input th:field="*{matricule}" type="text" name="matricule" id="matricule" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="" required>
+                            <span th:if="${errorMat}" class="text-red-600 text-sm mt-1">Ce matricule est déjà utilisé</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="embauche" class="block mb-2 text-sm font-medium">Date d'embauche</label>
+                        <input th:field="*{dateEmbauche}" type="date" name="embauche" id="embauche" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="" required>
+                    </div>
+                    <button type="submit" class="h-2/4 uppercase sm:mt-6 text-sm font-medium text-white bg-blue-600 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-blue-800">
+                        Valider
+                    </button>
+                </div>
+            </form>
+        </div>
+        <script type="text/javascript" th:src="@{/js/confirm-mdp.js}"></script>
+    </body>
+</html>

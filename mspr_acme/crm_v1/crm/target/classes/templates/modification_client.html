@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/main.css}"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <title>Modifier client</title>
+    </head>
+    <body class="bg-fixed bg-cover bg-center bg-no-repeat" style="background-image: url('/images/nouveau4.png');">
+        <nav th:replace="~{fragments/sidebar}"></nav>
+        <div class="mt-32 py-8 px-4 mx-auto max-w-screen-sm lg:py-16 text-white">
+            <h1 class="uppercase mb-4 text-2xl font-bold">Modifier un client</h1>
+            <form th:action="@{'/modifier-client/'+ ${idClient}}" method="post" th:object="${client}">
+                <div class="grid gap-3 grid-cols-1 md:grid-cols-3 md:gap-3 sm:grid-cols-2 sm:gap-3">
+                    <div class="w-full">
+                        <label for="prenom" class="block mb-2 text-sm font-medium">Prénom</label>
+                        <input th:value="${client.prenom}" type="text" name="prenom" id="prenom"  pattern="^[a-zA-Z0-9\s\.,-]*$" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="" required>
+                    </div>
+                    <div class="w-full">
+                        <label for="nom" class="block mb-2 text-sm font-medium">Nom</label>
+                        <input th:value="${client.nom}" type="text" name="nom" id="nom"  pattern="^[a-zA-Z0-9\s\.,-]*$" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="w-full">
+                        <label for="numRue" class="block mb-2 text-sm font-medium">N° rue</label>
+                        <input th:value="${client.numeroRue}" type="text" name="numRue" id="numRue"  pattern="^[a-zA-Z0-9\s\.,-]*$" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="sm:col-span-1 md:col-span-2">
+                        <label for="libelleRue" class="block mb-2 text-sm font-medium">Adresse</label>
+                        <input th:value="${client.libelleRue}" type="text" name="libelleRue" id="libelleRue"  pattern="^[a-zA-Z0-9\s\.,-]*$" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="w-full">
+                        <label for="codePostal" class="block mb-2 text-sm font-medium">Code postal</label>
+                        <input th:value="${client.codePostal}" type="text" name="codePostal" id="codePostal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="w-full">
+                        <label for="ville" class="block mb-2 text-sm font-medium">Ville</label>
+                        <input th:value="${client.ville}" type="text" name="ville" id="ville"  pattern="^[a-zA-Z0-9\s\.,-]*$" required  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="w-full">
+                        <label for="email" class="block mb-2 text-sm font-medium">E-mail</label>
+                        <input th:value="${client.email}" type="email" name="email" id="email" pattern="^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                    </div>
+                    <div class="w-full">
+                        <label for="telephone" class="block mb-2 text-sm font-medium">Téléphone</label>
+                        <input th:value="${client.telephone}" type="tel" name="telephone" id="telephone" pattern="(?:0|\(0\))[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})" required minlength="10" maxlength="10" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="">
+                            </div>
+                    <div class="mb-6">
+                        <label for="dateAffiliation" class="block mb-2 text-sm font-medium">Date d'affiliation</label>
+                        <input th:value="${client.dateAffiliation}" type="date" name="dateAffiliation" id="dateAffiliation"   pattern="^[a-zA-Z0-9\s\.,-]*$"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="" required>
+                    </div>
+                    <div class="w-full">
+                        <label for="preferenceCom" class="block mb-2 text-sm font-medium">Préférence commerciale</label>
+                        <input th:value="${client.preferenceCom}" type="text" name="preferenceCom" id="preferenceCom"  pattern="^[a-zA-Z0-9\s\.,-]*$" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="" required>
+                    </div>
+                    <button type="submit" class="h-2/5 uppercase mt-4 sm:mt-6 text-sm font-medium text-white bg-blue-600 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-blue-800">
+                        Valider
+                    </button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<div class="mb-16">
+  <div class="fixed z-50 top-0 w-full bg-white">
+    <div class="flex items-center justify-center mt-2 mb-4">
+      <a th:href="@{/main_menu}"><img th:src="@{/images/Ecritures/titres/84f1983bab734f900b78c0f7d8d6c136.png}" height="200" width="220" alt=""></a>
+      <a th:href="@{/main_menu}"><img th:src="@{/images/Ecritures/titres/93bd6a8d84735fb8542e5e2ba6097242.png}" height="350" width="400" alt=""></a>
+    </div>
+    <div class="flex items-center justify-center">
+      <img th:src="@{/images/Ecritures/titres/458227e3219d4d73753c52990003ebca.png}" height="300" width="400" alt="">
+    </div>
+  </div>
+  <div class="bg-white z-40 fixed top-16 w-full shadow pt-4">
+    <nav id="main-nav" class="bg-white mx-auto p-6 flex items-center justify-between">
+      <div th:if="${#authentication.principal}">
+        <p th:text="'Bienvenue, ' + ${#authentication.name}" class=" text-lg lg:text-xl"></p>
+      </div>
+      <div>
+        <p th:text="${pageTitle}" class="uppercase text-lg lg:text-xl underline"></p>
+      </div>
+      <button aria-label="toggle button" aria-expanded="false" id="menu-btn" class="cursor-pointer w-7 md:hidden">
+        <img th:src="@{/images/menu.svg}" alt="">
+      </button>
+      <ul id="toggled-menu" class="bg-white w-full absolute top-full left-0 -translate-y-full -z-10 text-gray-800 border-b border-gray-200 flex flex-col items-center md:static md:z-10 md:w-min md:transform-none md:border-none md:flex-row">
+        <li class="py-4 md:py-0 md:mr-6">
+          <a th:href="@{/passer-commande}" class="text-sm uppercase font-semibold w-full hover:text-orange-500 whitespace-nowrap">Passer commande</a>
+        </li>
+        <li class="py-4 md:py-0 md:mr-6">
+          <a th:href="@{/statistiques}" class="text-sm uppercase font-semibold w-full hover:text-blue-500" th:if="${#authorization.expression('hasRole(''ADMIN'') or hasRole(''RESPONSABLE'')')}">Statistiques</a>
+        </li>
+
+        <li class="py-4 md:py-0 md:mr-6">
+          <select onchange="window.location.href=this.value;" class="uppercase font-semibold bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block p-1 hover:text-blue-500">
+            <option value="" selected>Ajouter</option>
+            <option th:value="@{/ajouter-produit}">Produit</option>
+            <option th:value="@{/ajouter-client}">Client</option>
+            <div th:if="${#authorization.expression('isAuthenticated()')}">
+              <option th:value="@{/ajouter-employe}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Employés</option>
+            </div>
+
+          </select>
+        </li>
+        <li class="py-4 md:py-0 md:mr-6">
+          <select onchange="window.location.href=this.value;" class="uppercase font-semibold bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block p-1 hover:text-orange-500">
+            <option value="" selected>Afficher</option>
+            <option th:value="@{/produits}">Produits</option>
+            <option th:value="@{/produits-archives}">Produits archivés</option>
+            <option th:value="@{/commandes}">Commandes</option>
+            <option th:value="@{/clients}">Clients</option>
+            <option th:value="@{/clients-archives}">Clients Archivés</option>
+            <div th:if="${#authorization.expression('isAuthenticated()')}">
+              <option th:value="@{/employes}" th:if="${#authorization.expression('hasRole(''ADMIN'') or hasRole(''RESPONSABLE'')')}">Employés</option>
+              <option th:value="@{/employes-archives}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Employés Archivés</option>
+            </div>
+          </select>
+        </li>
+        <li>
+          <a th:href="@{/deconnexion}" title="Déconnexion" ><span class="material-symbols-outlined text-blue-500 hover:text-orange-600">logout</span></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<script type="text/javascript" th:src="@{/js/script_navbar.js}"></script>
